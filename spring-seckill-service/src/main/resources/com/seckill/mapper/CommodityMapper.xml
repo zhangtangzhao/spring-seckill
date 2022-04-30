@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seckill.mapper.CommodityMapper" >
+	<resultMap id="ResultMap" type="com.seckill.entity.CommodityEntity" >
+		<id column="ID" property="id"/>
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="stock" property="stock" jdbcType="INTEGER" />
+		<result column="create_date" property="createTime" jdbcType="DATE" />
+	</resultMap>
+	
+
+	<select id="selectStockById" parameterType="java.lang.Long" resultType="java.lang.Integer" >
+		select stock from commodity where id = #{id}
+	</select>
+
+	<update id="updateStock" parameterType="java.lang.Long" >
+		update commodity
+		set stock = stock -1
+		where id = #{id} and stock > 0
+	</update>
+
+</mapper>
